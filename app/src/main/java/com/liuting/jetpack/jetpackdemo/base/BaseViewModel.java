@@ -27,14 +27,14 @@ public class BaseViewModel extends AndroidViewModel {
 
     public BaseViewModel.UIChangeLiveData getUi() {
         if (this.ui == null) {
-            this.ui = new BaseViewModel.UIChangeLiveData();
+            this.ui = new UIChangeLiveData();
         }
 
         return this.ui;
     }
 
     public void startActivity(Class<?> cls) {
-        this.startActivity(cls, (Bundle)null);
+        startActivity(cls, (Bundle) null);
     }
 
     public void startActivity(Class<?> cls, Bundle bundle) {
@@ -48,7 +48,7 @@ public class BaseViewModel extends AndroidViewModel {
     }
 
     public void showLoading() {
-        this.showLoading("");
+        showLoading("");
     }
 
     public void showLoading(String text) {
@@ -56,9 +56,8 @@ public class BaseViewModel extends AndroidViewModel {
     }
 
     public void hideLoding() {
-        this.ui.hideLoadingEvent.call();
+        ui.hideLoadingEvent.call();
     }
-
 
 
     public void startActivityForResult(Class<?> cls, Bundle bundle, int requestCode) {
@@ -74,11 +73,11 @@ public class BaseViewModel extends AndroidViewModel {
 
 
     public void finish() {
-        this.ui.finishEvent.call();
+        ui.finishEvent.call();
     }
 
     public void onBackPressed() {
-        this.ui.onBackPressedEvent.call();
+        ui.onBackPressedEvent.call();
     }
 
 
@@ -91,42 +90,42 @@ public class BaseViewModel extends AndroidViewModel {
         }
     }
 
-    public final class UIChangeLiveData {
+    public static final class UIChangeLiveData {
         private SingleLiveEvent<Void> finishEvent;
         private SingleLiveEvent<Void> onBackPressedEvent;
         private SingleLiveEvent<Map<String, Object>> startActivityEvent;
         private SingleLiveEvent<Map<String, Object>> startActivityForResultEvent;
         private SingleLiveEvent<String> showLoadingEvent;
 
+        private SingleLiveEvent<Void> hideLoadingEvent;
+
         public SingleLiveEvent<String> getShowLoadingEvent() {
-            return showLoadingEvent;
+            return showLoadingEvent = createLiveData(showLoadingEvent);
         }
 
         public SingleLiveEvent<Void> getHideLoadingEvent() {
-            return hideLoadingEvent;
+            return hideLoadingEvent = createLiveData(hideLoadingEvent);
         }
-
-        private SingleLiveEvent<Void> hideLoadingEvent;
 
 
         public SingleLiveEvent<Void> getFinishEvent() {
-            return this.finishEvent = createLiveData(this.finishEvent);
+            return finishEvent = createLiveData(finishEvent);
         }
 
         public SingleLiveEvent<Void> getOnBackPressedEvent() {
-            return this.onBackPressedEvent = createLiveData(this.onBackPressedEvent);
+            return onBackPressedEvent = createLiveData(onBackPressedEvent);
         }
 
         public SingleLiveEvent<Map<String, Object>> getStartActivityEvent() {
-            return this.startActivityEvent = createLiveData(this.startActivityEvent);
+            return startActivityEvent = createLiveData(startActivityEvent);
         }
 
         public SingleLiveEvent<Map<String, Object>> getStartActivityForResultEvent() {
-            return this.startActivityForResultEvent = createLiveData(this.startActivityForResultEvent);
+            return startActivityForResultEvent = createLiveData(startActivityForResultEvent);
         }
 
 
-        private <T> SingleLiveEvent<T>  createLiveData(SingleLiveEvent<T> liveData) {
+        private <T> SingleLiveEvent<T> createLiveData(SingleLiveEvent<T> liveData) {
             if (liveData == null) {
                 liveData = new SingleLiveEvent<T>();
             }
