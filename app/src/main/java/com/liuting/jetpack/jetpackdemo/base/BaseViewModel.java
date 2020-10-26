@@ -18,11 +18,11 @@ import androidx.lifecycle.ViewModel;
  * 包名：com.liuting.jetpack.jetpackdemo.base
  * TODO:
  */
-public class BaseViewModel extends ViewModel {
-    protected Context mContext;
+public class BaseViewModel extends AndroidViewModel {
     private BaseViewModel.UIChangeLiveData ui;
-    protected void inject(Context context){
-        mContext=context;
+
+    public BaseViewModel(@NonNull Application application) {
+        super(application);
     }
 
     public BaseViewModel.UIChangeLiveData getUi() {
@@ -47,10 +47,22 @@ public class BaseViewModel extends ViewModel {
         this.ui.startActivityEvent.postValue(params);
     }
 
+    public void showLoading() {
+        this.showLoading("");
+    }
+
+    public void showLoading(String text) {
+        this.ui.showLoadingEvent.setValue(text);
+    }
+
+    public void hideLoding() {
+        this.ui.hideLoadingEvent.call();
+    }
+
 
 
     public void startActivityForResult(Class<?> cls, Bundle bundle, int requestCode) {
-        Map<String, Object> params = new HashMap();
+        Map<String, Object> params = new HashMap<>();
         params.put(BaseViewModel.ParameterField.CLASS, cls);
         if (bundle != null) {
             params.put(BaseViewModel.ParameterField.BUNDLE, bundle);
@@ -84,6 +96,17 @@ public class BaseViewModel extends ViewModel {
         private SingleLiveEvent<Void> onBackPressedEvent;
         private SingleLiveEvent<Map<String, Object>> startActivityEvent;
         private SingleLiveEvent<Map<String, Object>> startActivityForResultEvent;
+        private SingleLiveEvent<String> showLoadingEvent;
+
+        public SingleLiveEvent<String> getShowLoadingEvent() {
+            return showLoadingEvent;
+        }
+
+        public SingleLiveEvent<Void> getHideLoadingEvent() {
+            return hideLoadingEvent;
+        }
+
+        private SingleLiveEvent<Void> hideLoadingEvent;
 
 
         public SingleLiveEvent<Void> getFinishEvent() {

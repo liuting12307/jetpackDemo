@@ -47,7 +47,7 @@ public class HomeFragment extends BaseMVVMFragment<FragmentHomeBinding,HomeViewM
 
     @Override
     protected int getViewModelId() {
-        return BR.viewModel;
+        return BR.viewmodel;
     }
 
     @Override
