@@ -32,24 +32,29 @@ public class LoginViewModel extends BaseViewModel {
         login();
     });
     public BindingCommand<View> loginCommand2 = new BindingCommand<>( var1 -> finish());
+
+    public LoginViewModel(@NonNull Application application) {
+        super(application);
+    }
+
     public void login(){
         String useName=mUserName.get();
         String password=mPassword.get();
         Log.d(TAG,"useName="+useName);
         Log.d(TAG,"password="+password);
         if(TextUtils.isEmpty(useName)){
-            Toast.makeText(mContext,"用户名不能为空",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplication(),"用户名不能为空",Toast.LENGTH_SHORT).show();
             return ;
         }
         if(TextUtils.isEmpty(password)){
-            Toast.makeText(mContext,"密码不能为空",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplication(),"密码不能为空",Toast.LENGTH_SHORT).show();
             return;
         }
         if(useName.equals("123")&&password.equals("123")){
             Log.d(TAG,"登录成功");
             startActivity(MainActivity.class);
         }else{
-            Toast.makeText(mContext,"用户名或密码错误",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplication(),"用户名或密码错误",Toast.LENGTH_SHORT).show();
         }
     }
 }

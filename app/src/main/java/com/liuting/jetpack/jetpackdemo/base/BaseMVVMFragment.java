@@ -86,7 +86,6 @@ public abstract class BaseMVVMFragment<DB extends ViewDataBinding, VM extends Ba
     public void initViewDataBinding() {
         viewModel = initViewModel();
         viewModelId = this.getViewModelId();
-        viewModel.inject(getActivity());
         binding.setVariable(viewModelId, viewModel);
 
     }

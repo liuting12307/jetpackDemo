@@ -18,23 +18,23 @@ import androidx.lifecycle.ViewModel;
  * 包名：com.liuting.jetpack.jetpackdemo.base
  * TODO:
  */
-public class BaseViewModel extends ViewModel {
-    protected Context mContext;
+public class BaseViewModel extends AndroidViewModel {
     private BaseViewModel.UIChangeLiveData ui;
-    protected void inject(Context context){
-        mContext=context;
+
+    public BaseViewModel(@NonNull Application application) {
+        super(application);
     }
 
     public BaseViewModel.UIChangeLiveData getUi() {
         if (this.ui == null) {
-            this.ui = new BaseViewModel.UIChangeLiveData();
+            this.ui = new UIChangeLiveData();
         }
 
         return this.ui;
     }
 
     public void startActivity(Class<?> cls) {
-        this.startActivity(cls, (Bundle)null);
+        startActivity(cls, (Bundle) null);
     }
 
     public void startActivity(Class<?> cls, Bundle bundle) {
@@ -47,10 +47,21 @@ public class BaseViewModel extends ViewModel {
         this.ui.startActivityEvent.postValue(params);
     }
 
+    public void showLoading() {
+        showLoading("");
+    }
+
+    public void showLoading(String text) {
+        this.ui.showLoadingEvent.setValue(text);
+    }
+
+    public void hideLoding() {
+        ui.hideLoadingEvent.call();
+    }
 
 
     public void startActivityForResult(Class<?> cls, Bundle bundle, int requestCode) {
-        Map<String, Object> params = new HashMap();
+        Map<String, Object> params = new HashMap<>();
         params.put(BaseViewModel.ParameterField.CLASS, cls);
         if (bundle != null) {
             params.put(BaseViewModel.ParameterField.BUNDLE, bundle);
@@ -62,11 +73,11 @@ public class BaseViewModel extends ViewModel {
 
 
     public void finish() {
-        this.ui.finishEvent.call();
+        ui.finishEvent.call();
     }
 
     public void onBackPressed() {
-        this.ui.onBackPressedEvent.call();
+        ui.onBackPressedEvent.call();
     }
 
 
@@ -79,47 +90,42 @@ public class BaseViewModel extends ViewModel {
         }
     }
 
-    public void showLoading(String text) {
-        this.ui.showLoadingEvent.setValue(text);
-    }
-
-    public void hideLoding() {
-        this.ui.hideLoadingEvent.call();
-    }
-
-    public final class UIChangeLiveData {
+    public static final class UIChangeLiveData {
         private SingleLiveEvent<Void> finishEvent;
         private SingleLiveEvent<Void> onBackPressedEvent;
-        private SingleLiveEvent<String> showLoadingEvent;
-        private SingleLiveEvent<Void> hideLoadingEvent;
         private SingleLiveEvent<Map<String, Object>> startActivityEvent;
         private SingleLiveEvent<Map<String, Object>> startActivityForResultEvent;
+        private SingleLiveEvent<String> showLoadingEvent;
 
+        private SingleLiveEvent<Void> hideLoadingEvent;
 
-        public SingleLiveEvent<Void> getFinishEvent() {
-            return this.finishEvent = createLiveData(this.finishEvent);
-        }
-        public SingleLiveEvent<String> getshowLoadingEvent() {
-            return this.showLoadingEvent = this.createLiveData(this.showLoadingEvent);
+        public SingleLiveEvent<String> getShowLoadingEvent() {
+            return showLoadingEvent = createLiveData(showLoadingEvent);
         }
 
         public SingleLiveEvent<Void> getHideLoadingEvent() {
-            return this.hideLoadingEvent = this.createLiveData(this.hideLoadingEvent);
+            return hideLoadingEvent = createLiveData(hideLoadingEvent);
         }
+
+
+        public SingleLiveEvent<Void> getFinishEvent() {
+            return finishEvent = createLiveData(finishEvent);
+        }
+
         public SingleLiveEvent<Void> getOnBackPressedEvent() {
-            return this.onBackPressedEvent = createLiveData(this.onBackPressedEvent);
+            return onBackPressedEvent = createLiveData(onBackPressedEvent);
         }
 
         public SingleLiveEvent<Map<String, Object>> getStartActivityEvent() {
-            return this.startActivityEvent = createLiveData(this.startActivityEvent);
+            return startActivityEvent = createLiveData(startActivityEvent);
         }
 
         public SingleLiveEvent<Map<String, Object>> getStartActivityForResultEvent() {
-            return this.startActivityForResultEvent = createLiveData(this.startActivityForResultEvent);
+            return startActivityForResultEvent = createLiveData(startActivityForResultEvent);
         }
 
 
-        private <T> SingleLiveEvent<T>  createLiveData(SingleLiveEvent<T> liveData) {
+        private <T> SingleLiveEvent<T> createLiveData(SingleLiveEvent<T> liveData) {
             if (liveData == null) {
                 liveData = new SingleLiveEvent<T>();
             }
