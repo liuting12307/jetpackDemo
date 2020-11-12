@@ -8,28 +8,41 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.databinding.library.baseAdapters.BR;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.liuting.jetpack.jetpackdemo.R;
+import com.liuting.jetpack.jetpackdemo.base.BaseMVVMFragment;
+import com.liuting.jetpack.jetpackdemo.databinding.FragmentNotificationsBinding;
 
-public class NotificationsFragment extends Fragment {
+public class NotificationsFragment extends BaseMVVMFragment<FragmentNotificationsBinding,NotificationsViewModel> {
 
-    private NotificationsViewModel notificationsViewModel;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        notificationsViewModel =
-                new ViewModelProvider(this).get(NotificationsViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_notifications, container, false);
-        final TextView textView = root.findViewById(R.id.text_notifications);
-        notificationsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+    @Override
+    protected void initData() {
+
+    }
+
+    @Override
+    protected void initViewObservable() {
+        binding.textNotifications.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
+            public void onClick(View v) {
+                FaceAccessDatePickDialog faceAccessDatePickDialog=new FaceAccessDatePickDialog(getContext());
+                faceAccessDatePickDialog.show();
             }
         });
-        return root;
+    }
+
+    @Override
+    protected int getViewModelId() {
+        return BR.viewModel;
+    }
+
+    @Override
+    public int getContentViewLayoutId() {
+        return R.layout.fragment_notifications;
     }
 }

@@ -20,6 +20,7 @@ public class HomeViewModel extends BaseViewModel {
 
     @SuppressLint("CheckResult")
     public void getAirCitys(){
+        showLoading("正在加载");
         AirCityRepository.mInstance.getAirCityList().subscribe(
                 airCityBeans -> {
                     mListMutableLiveData.setValue(airCityBeans);

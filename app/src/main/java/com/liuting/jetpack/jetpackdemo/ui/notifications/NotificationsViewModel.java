@@ -1,19 +1,19 @@
 package com.liuting.jetpack.jetpackdemo.ui.notifications;
 
+import android.view.View;
+
+import com.liuting.jetpack.jetpackdemo.base.BaseViewModel;
+import com.liuting.jetpack.jetpackdemo.base.BindingCommand;
+import com.liuting.jetpack.jetpackdemo.base.basebindingadapter.BindingAction;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class NotificationsViewModel extends ViewModel {
+public class NotificationsViewModel extends BaseViewModel {
 
-    private MutableLiveData<String> mText;
-
-    public NotificationsViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is notifications fragment");
-    }
-
-    public LiveData<String> getText() {
-        return mText;
-    }
+    public MutableLiveData<Boolean> dateClickLiveData=new MutableLiveData<>(false);
+    public BindingCommand<View> dateCommand = new BindingCommand<>(var1 -> {
+        dateClickLiveData.setValue(true);
+    });
 }

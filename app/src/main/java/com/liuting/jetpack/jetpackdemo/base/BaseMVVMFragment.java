@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -14,6 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 /**
@@ -118,6 +120,9 @@ public abstract class BaseMVVMFragment<DB extends ViewDataBinding, VM extends Ba
             Bundle bundle = (Bundle)params.get(BaseViewModel.ParameterField.BUNDLE);
             int requestCode = (Integer)params.get(BaseViewModel.ParameterField.REQUESTCODE);
             startActivityForResult(cls, bundle, requestCode);
+        });
+        viewModel.getUi().getshowLoadingEvent().observe(this, s -> {
+            Toast.makeText(getActivity(),s,Toast.LENGTH_SHORT).show();
         });
 
     }

@@ -79,9 +79,19 @@ public class BaseViewModel extends ViewModel {
         }
     }
 
+    public void showLoading(String text) {
+        this.ui.showLoadingEvent.setValue(text);
+    }
+
+    public void hideLoding() {
+        this.ui.hideLoadingEvent.call();
+    }
+
     public final class UIChangeLiveData {
         private SingleLiveEvent<Void> finishEvent;
         private SingleLiveEvent<Void> onBackPressedEvent;
+        private SingleLiveEvent<String> showLoadingEvent;
+        private SingleLiveEvent<Void> hideLoadingEvent;
         private SingleLiveEvent<Map<String, Object>> startActivityEvent;
         private SingleLiveEvent<Map<String, Object>> startActivityForResultEvent;
 
@@ -89,7 +99,13 @@ public class BaseViewModel extends ViewModel {
         public SingleLiveEvent<Void> getFinishEvent() {
             return this.finishEvent = createLiveData(this.finishEvent);
         }
+        public SingleLiveEvent<String> getshowLoadingEvent() {
+            return this.showLoadingEvent = this.createLiveData(this.showLoadingEvent);
+        }
 
+        public SingleLiveEvent<Void> getHideLoadingEvent() {
+            return this.hideLoadingEvent = this.createLiveData(this.hideLoadingEvent);
+        }
         public SingleLiveEvent<Void> getOnBackPressedEvent() {
             return this.onBackPressedEvent = createLiveData(this.onBackPressedEvent);
         }

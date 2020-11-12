@@ -24,8 +24,8 @@ import androidx.lifecycle.ViewModel;
  */
 public class LoginViewModel extends BaseViewModel {
    private String TAG=getClass().getSimpleName();
-    public ObservableField<String> mUserName=new ObservableField<>("");
-    public ObservableField<String> mPassword=new ObservableField<>("");
+    public ObservableField<String> mUserName=new ObservableField<>("123");
+    public ObservableField<String> mPassword=new ObservableField<>("123");
 
 
     public BindingCommand<View> loginCommand = new BindingCommand<>(var1 -> {

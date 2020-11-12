@@ -48,6 +48,9 @@ public class AirCityAdapter extends RecyclerView.Adapter<MyViewHolder> {
         AirCityBean bean=mList.get(position);
         ItemAirCityBinding binding = DataBindingUtil.getBinding(holder.itemView);
         binding.tvCity.setText(bean.getProvince()+" "+bean.getCity()+" "+bean.getDistrict());
+        holder.itemView.setOnClickListener(v -> {
+
+        });
 
     }
 
