@@ -1,5 +1,6 @@
 package com.liuting.jetpack.jetpackdemo.ui.dashboard;
 
+import com.liuting.jetpack.jetpackdemo.BR;
 import com.liuting.jetpack.jetpackdemo.R;
 import com.liuting.jetpack.jetpackdemo.base.BaseMVVMFragment;
 import com.liuting.jetpack.jetpackdemo.databinding.FragmentDashboardBinding;
@@ -8,7 +9,6 @@ import com.liuting.jetpack.jetpackdemo.ui.dashboard.bean.NewsBean;
 
 import java.util.ArrayList;
 
-import androidx.databinding.library.baseAdapters.BR;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 public class DashboardFragment extends BaseMVVMFragment<FragmentDashboardBinding,DashboardViewModel> {

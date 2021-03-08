@@ -120,7 +120,7 @@ public abstract class BaseMVVMFragment<DB extends ViewDataBinding, VM extends Ba
             int requestCode = (Integer)params.get(BaseViewModel.ParameterField.REQUESTCODE);
             startActivityForResult(cls, bundle, requestCode);
         });
-        viewModel.getUi().getshowLoadingEvent().observe(this, s -> {
+        viewModel.getUi().getShowLoadingEvent().observe(this, s -> {
             Toast.makeText(getActivity(),s,Toast.LENGTH_SHORT).show();
         });
 

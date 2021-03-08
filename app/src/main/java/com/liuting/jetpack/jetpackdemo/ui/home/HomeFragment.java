@@ -1,5 +1,6 @@
 package com.liuting.jetpack.jetpackdemo.ui.home;
 
+import com.liuting.jetpack.jetpackdemo.BR;
 import com.liuting.jetpack.jetpackdemo.R;
 import com.liuting.jetpack.jetpackdemo.base.BaseMVVMFragment;
 import com.liuting.jetpack.jetpackdemo.databinding.FragmentHomeBinding;
@@ -8,7 +9,6 @@ import com.liuting.jetpack.jetpackdemo.ui.home.bean.AirCityBean;
 
 import java.util.ArrayList;
 
-import androidx.databinding.library.baseAdapters.BR;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 public class HomeFragment extends BaseMVVMFragment<FragmentHomeBinding,HomeViewModel> {
