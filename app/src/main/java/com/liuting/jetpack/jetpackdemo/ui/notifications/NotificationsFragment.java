@@ -21,7 +21,7 @@ public class NotificationsFragment extends BaseMVVMFragment<FragmentNotification
 
     @Override
     protected int getViewModelId() {
-        return BR.viewModel;
+        return BR.viewmodel;
     }
 
     @Override

@@ -25,7 +25,7 @@
             android:textAlignment="center"
             android:text="xRecyclerView"
             android:textSize="20sp"
-            app:onClickCommand="@{viewmodel.dateCommand}"
+            app:onClickCommand="@{viewmodel.recyclerViewCommand}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

@@ -25,7 +25,7 @@ import androidx.appcompat.app.AppCompatActivity;
  * 包名：com.liuting.jetpack.jetpackdemo.ui.notifications
  * TODO:
  */
-class XRecyclerViewActivity extends AppCompatActivity {
+public class XRecyclerViewActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
