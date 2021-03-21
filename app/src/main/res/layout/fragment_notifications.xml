@@ -15,17 +15,17 @@
         android:layout_height="match_parent"
         tools:context=".ui.notifications.NotificationsFragment">
 
-        <TextView
-
+        <Button
+            android:id="@+id/bt_xrecyclerview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:textAlignment="center"
-            android:text="显示时间对话框"
+            android:text="xRecyclerView"
             android:textSize="20sp"
-
+            app:onClickCommand="@{viewmodel.dateCommand}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

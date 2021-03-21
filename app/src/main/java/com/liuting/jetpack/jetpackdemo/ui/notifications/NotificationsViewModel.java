@@ -18,6 +18,9 @@ public class NotificationsViewModel extends BaseViewModel {
     public BindingCommand<View> dateCommand = new BindingCommand<>(var1 -> {
         dateClickLiveData.setValue(true);
     });
+    public BindingCommand<View> recyclerViewCommand = new BindingCommand<>(var1 -> {
+        startActivity(XRecyclerViewActivity.class);
+    });
 
     public NotificationsViewModel(@NonNull Application application) {
         super(application);
